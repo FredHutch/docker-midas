@@ -1,5 +1,7 @@
 # Docker - MIDAS
 
+[![Docker Repository on Quay](https://quay.io/repository/fhcrc-microbiome/midas/status "Docker Repository on Quay")](https://quay.io/repository/fhcrc-microbiome/midas)
+
 This repository provides a Docker image for running MIDAS that is compatible with automated analysis on AWS Batch. Specifically, this image includes a wrapper script that:
 
 
