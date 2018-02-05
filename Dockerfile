@@ -39,7 +39,8 @@ RUN cd /usr/midas && \
 	rm /usr/local/bin/samtools && \
 	rm /usr/midas/MIDAS-1.3.2/bin/Linux/samtools && \
 	ln -s /usr/midas/samtools-1.4/samtools /usr/local/bin/ && \
-	rm /usr/midas/samtools-1.4.tar.bz2
+	rm /usr/midas/samtools-1.4.tar.bz2 && \
+	ln -s /usr/midas/samtools-1.4/samtools /usr/midas/MIDAS-1.3.2/bin/Linux/
 
 # Install the SRA toolkit
 RUN cd /usr/local/bin && \
