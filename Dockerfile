@@ -19,12 +19,13 @@ ADD requirements.txt /usr/midas
 # Install python requirements
 RUN pip install -r /usr/midas/requirements.txt && rm /usr/midas/requirements.txt
 
-
-# Install MIDAS
+# Install MIDAS and remove the samtools and bowtie2 binaries
 RUN cd /usr/midas && \
 	wget https://github.com/snayfach/MIDAS/archive/v1.3.2.tar.gz && \
 	tar xzf v1.3.2.tar.gz && \
-	python MIDAS-1.3.2/setup.py install
+	python MIDAS-1.3.2/setup.py install && \
+	rm /usr/midas/MIDAS-1.3.2/bin/Linux/samtools && \
+	rm /usr/midas/MIDAS-1.3.2/bin/Linux/bowtie2*	
 # Add to the PATH
 ENV PYTHONPATH="/usr/midas/MIDAS-1.3.2:${PYTHONPATH}"
 ENV PATH="/usr/midas/MIDAS-1.3.2/scripts:${PATH}"
@@ -38,7 +39,6 @@ RUN cd /usr/midas && \
 	make && \
 	make install && \
 	rm /usr/local/bin/samtools && \
-	rm /usr/midas/MIDAS-1.3.2/bin/Linux/samtools && \
 	ln -s /usr/midas/samtools-1.4/samtools /usr/midas/MIDAS-1.3.2/bin/Linux/ && \
 	ln -s /usr/midas/samtools-1.4/samtools /usr/local/bin/ && \
 	rm /usr/midas/samtools-1.4.tar.bz2
@@ -49,7 +49,6 @@ RUN cd /usr/midas && \
 	unzip bowtie2-2.3.2-linux-x86_64.zip && \
 	rm bowtie2-2.3.2-linux-x86_64.zip && \
 	cd bowtie2-2.3.2 && \
-	rm /usr/midas/MIDAS-1.3.2/bin/Linux/bowtie2* && \
 	ln -s /usr/midas/bowtie2-2.3.2/bowtie2* /usr/midas/MIDAS-1.3.2/bin/Linux/ && \
 	ln -s /usr/midas/bowtie2-2.3.2/bowtie2* /usr/local/bin/
 
