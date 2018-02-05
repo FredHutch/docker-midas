@@ -17,6 +17,12 @@
   [[ "$v" =~ "7.47.0" ]]
 }
 
+@test "Samtools v1.4" {
+  v="$(samtools --version)"
+
+  [[ "$v" =~ "samtools 1.4" ]]
+}
+
 @test "Make sure MIDAS is in the PATH" {
   h="$(run_midas.py -h)"
 
