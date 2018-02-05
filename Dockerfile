@@ -4,7 +4,8 @@ MAINTAINER sminot@fredhutch.org
 # Install prerequisites
 RUN apt update && \
 	apt-get install -y build-essential wget unzip python2.7 python-dev git python-pip \
-	bats awscli curl zlib1g-dev libbz2-dev liblzma-dev libcurl4-openssl-dev libssl1.0.0 libssl-dev
+	bats awscli curl zlib1g-dev libbz2-dev liblzma-dev libcurl4-openssl-dev libssl1.0.0 \
+	libssl-dev libtbb-dev g++
 
 
 # Use /share as the working directory
@@ -22,10 +23,10 @@ RUN pip install -r /usr/midas/requirements.txt && rm /usr/midas/requirements.txt
 # Install MIDAS
 RUN cd /usr/midas && \
 	wget https://github.com/snayfach/MIDAS/archive/v1.3.2.tar.gz && \
-	tar xzvf v1.3.2.tar.gz
+	tar xzf v1.3.2.tar.gz && \
+	python MIDAS-1.3.2/setup.py install
 # Add to the PATH
 ENV PYTHONPATH="/usr/midas/MIDAS-1.3.2:${PYTHONPATH}"
-ENV PATH="/usr/midas/MIDAS-1.3.2/bin/Linux:${PATH}"
 ENV PATH="/usr/midas/MIDAS-1.3.2/scripts:${PATH}"
 
 # Install SAMTOOLS
@@ -38,9 +39,19 @@ RUN cd /usr/midas && \
 	make install && \
 	rm /usr/local/bin/samtools && \
 	rm /usr/midas/MIDAS-1.3.2/bin/Linux/samtools && \
+	ln -s /usr/midas/samtools-1.4/samtools /usr/midas/MIDAS-1.3.2/bin/Linux/ && \
 	ln -s /usr/midas/samtools-1.4/samtools /usr/local/bin/ && \
-	rm /usr/midas/samtools-1.4.tar.bz2 && \
-	ln -s /usr/midas/samtools-1.4/samtools /usr/midas/MIDAS-1.3.2/bin/Linux/
+	rm /usr/midas/samtools-1.4.tar.bz2
+
+# Install Bowtie2
+RUN cd /usr/midas && \
+	wget https://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.3.2/bowtie2-2.3.2-linux-x86_64.zip && \
+	unzip bowtie2-2.3.2-linux-x86_64.zip && \
+	rm bowtie2-2.3.2-linux-x86_64.zip && \
+	cd bowtie2-2.3.2 && \
+	rm /usr/midas/MIDAS-1.3.2/bin/Linux/bowtie2* && \
+	ln -s /usr/midas/bowtie2-2.3.2/bowtie2* /usr/midas/MIDAS-1.3.2/bin/Linux/ && \
+	ln -s /usr/midas/bowtie2-2.3.2/bowtie2* /usr/local/bin/
 
 # Install the SRA toolkit
 RUN cd /usr/local/bin && \

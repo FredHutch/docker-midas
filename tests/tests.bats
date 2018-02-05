@@ -23,8 +23,14 @@
   [[ "$v" =~ "samtools 1.4" ]]
 }
 
+@test "Bowtie2 2.3.2" {
+  v="$(bowtie2 --version)"
+
+  [[ "$v" =~ "bowtie2-align-s version 2.3.2" ]]
+}
+
 @test "Make sure MIDAS is in the PATH" {
-  h="$(run_midas.py -h)"
+  h="$(cd /usr/midas/MIDAS-1.3.2/test && run_midas.py -h)"
 
   [[ "$h" =~ "Estimate species abundance and intra-species genomic variation from an individual metagenome" ]]
 }
