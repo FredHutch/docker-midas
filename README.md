@@ -37,7 +37,6 @@ Number of threads used by MIDAS during alignment, defaults to 16.
 
 ### Output format
 
-TBD
 
 ```
 {
@@ -48,11 +47,45 @@ TBD
   "ref_db": <LOCAL_PATH_TO_REF_DB>,
   "ref_db_url": <URL_FOR_REF_DB>,
   "total_reads": <INT>,
-  "aligned_reads": <INT>,
   "time_elapsed": <FLOAT_SECONDS>,
-  "results": [
-    ...
-  ]
+  "results": {
+    "species": [
+      {
+        "species_id": "Clostridium_botulinum_57664",
+        "relative_abundance": 0.966368434694,
+        "count_reads": 5631,
+        "coverage": 95.0686106346
+      },
+      ...species level data for more species...
+    ],
+    "genes": [
+      {
+        "species_id": "Clostridium_sporogenes_58038",
+        "marker_coverage": 0,
+        "fraction_covered": 0.112485472356,
+        "aligned_reads": 98310,
+        "covered_genes": 1355,
+        "mean_coverage": 6.65663712323,
+        "mapped_reads": 49030,
+        "pangenome_size": 12046
+        "genes": [
+          {
+            "copy_number": 0,
+            "count_reads": 47,
+            "coverage": 5.62211614956,
+            "gene_id": "1075091.3.peg.1003",
+            "annot": {
+              "figfam": [
+                "FIG00517132"
+              ]
+            }
+          },
+          ...more genes...
+          ]
+        },
+        ...gene level data for more species...
+      ]
+    }
 }
 ```
 
