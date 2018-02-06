@@ -64,11 +64,10 @@ ENV PATH="/usr/midas/MIDAS-1.3.2/scripts:${PATH}"
 
 # Add the run script to the PATH
 ADD run.py /usr/midas
-ADD helpers /usr/midas/helpers
+ADD lib /usr/midas/lib
 RUN cd /usr/midas && \
 	chmod +x run.py && \
 	ln -s /usr/midas/run.py /usr/bin/
-
 
 # Run tests and then remove the folder
 ADD tests /usr/midas/tests

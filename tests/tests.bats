@@ -36,7 +36,13 @@
 }
 
 @test "Make sure the run script is in the PATH" {
-  h="$(run.py -h)"
-
+  h="$(run.py -h 2>&1)"
+  echo $h
   [[ "$h" =~ "Analyze a set of reads with MIDAS" ]]
+}
+
+@test "Parse MIDAS output" {
+  h="$(python /usr/midas/lib/test_parse_midas_output.py)"
+  echo $h
+  [[ "$h" =~ "Passed all tests" ]]
 }

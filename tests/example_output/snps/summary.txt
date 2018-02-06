@@ -1,0 +1,2 @@
+species_id	genome_length	covered_bases	fraction_covered	mean_coverage	aligned_reads	mapped_reads
+Salmonella_enterica_58156	4685779	3917368	0.836012112394	3.97788515146	85419	79852

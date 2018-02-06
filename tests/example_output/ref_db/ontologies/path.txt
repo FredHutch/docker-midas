@@ -1,0 +1,146 @@
+00010	Glycolysis / Gluconeogenesis
+00020	Citrate cycle (TCA cycle)
+00030	Pentose phosphate pathway
+00040	Pentose and glucuronate interconversions
+00051	Fructose and mannose metabolism
+00052	Galactose metabolism
+00053	Ascorbate and aldarate metabolism
+00061	Fatty acid biosynthesis
+00062	Fatty acid elongation in mitochondria
+00071	Fatty acid metabolism
+00072	Synthesis and degradation of ketone bodies
+00100	Steroid biosynthesis
+00120	Primary bile acid biosynthesis
+00121	Secondary bile acid biosynthesis
+00130	Ubiquinone and other terpenoid-quinone biosynthesis
+00140	C21-Steroid hormone metabolism
+00190	Oxidative phosphorylation
+00195	Photosynthesis
+00196	Photosynthesis - antenna proteins
+00230	Purine metabolism
+00231	Puromycin biosynthesis
+00232	Caffeine metabolism
+00240	Pyrimidine metabolism
+00250	Alanine, aspartate and glutamate metabolism
+00253	Tetracycline biosynthesis
+00260	Glycine, serine and threonine metabolism
+00270	Cysteine and methionine metabolism
+00280	Valine, leucine and isoleucine degradation
+00281	Geraniol degradation
+00290	Valine, leucine and isoleucine biosynthesis
+00300	Lysine biosynthesis
+00310	Lysine degradation
+00311	Penicillin and cephalosporin biosynthesis
+00312	beta-Lactam resistance
+00330	Arginine and proline metabolism
+00331	Clavulanic acid biosynthesis
+00340	Histidine metabolism
+00350	Tyrosine metabolism
+00351	1,1,1-Trichloro-2,2-bis(4-chlorophenyl)ethane (DDT) degradation
+00360	Phenylalanine metabolism
+00361	gamma-Hexachlorocyclohexane degradation
+00362	Benzoate degradation via hydroxylation
+00363	Bisphenol A degradation
+00364	Fluorobenzoate degradation
+00380	Tryptophan metabolism
+00400	Phenylalanine, tyrosine and tryptophan biosynthesis
+00401	Novobiocin biosynthesis
+00410	beta-Alanine metabolism
+00430	Taurine and hypotaurine metabolism
+00440	Phosphonate and phosphinate metabolism
+00450	Selenoamino acid metabolism
+00460	Cyanoamino acid metabolism
+00471	D-Glutamine and D-glutamate metabolism
+00472	D-Arginine and D-ornithine metabolism
+00473	D-Alanine metabolism
+00480	Glutathione metabolism
+00500	Starch and sucrose metabolism
+00510	N-Glycan biosynthesis
+00512	O-Glycan biosynthesis
+00513	High-mannose type N-glycan biosynthesis
+00520	Amino sugar and nucleotide sugar metabolism
+00521	Streptomycin biosynthesis
+00522	Biosynthesis of 12-, 14- and 16-membered macrolides
+00523	Polyketide sugar unit biosynthesis
+00531	Glycosaminoglycan degradation
+00532	Chondroitin sulfate biosynthesis
+00534	Heparan sulfate biosynthesis
+00540	Lipopolysaccharide biosynthesis
+00550	Peptidoglycan biosynthesis
+00561	Glycerolipid metabolism
+00562	Inositol phosphate metabolism
+00563	Glycosylphosphatidylinositol(GPI)-anchor biosynthesis
+00564	Glycerophospholipid metabolism
+00565	Ether lipid metabolism
+00590	Arachidonic acid metabolism
+00591	Linoleic acid metabolism
+00592	alpha-Linolenic acid metabolism
+00600	Sphingolipid metabolism
+00601	Glycosphingolipid biosynthesis - lacto and neolacto series
+00603	Glycosphingolipid biosynthesis - globo series
+00604	Glycosphingolipid biosynthesis - ganglio series
+00620	Pyruvate metabolism
+00621	Biphenyl degradation
+00622	Toluene and xylene degradation
+00623	2,4-Dichlorobenzoate degradation
+00624	1- and 2-Methylnaphthalene degradation
+00625	Tetrachloroethene degradation
+00626	Naphthalene and anthracene degradation
+00627	1,4-Dichlorobenzene degradation
+00630	Glyoxylate and dicarboxylate metabolism
+00633	Trinitrotoluene degradation
+00640	Propanoate metabolism
+00642	Ethylbenzene degradation
+00643	Styrene degradation
+00650	Butanoate metabolism
+00660	C5-Branched dibasic acid metabolism
+00670	One carbon pool by folate
+00680	Methane metabolism
+00710	Carbon fixation in photosynthetic organisms
+00720	Reductive carboxylate cycle (CO2 fixation)
+00730	Thiamine metabolism
+00740	Riboflavin metabolism
+00750	Vitamin B6 metabolism
+00760	Nicotinate and nicotinamide metabolism
+00770	Pantothenate and CoA biosynthesis
+00780	Biotin metabolism
+00790	Folate biosynthesis
+00791	Atrazine degradation
+00830	Retinol metabolism
+00860	Porphyrin and chlorophyll metabolism
+00900	Terpenoid backbone biosynthesis
+00901	Indole alkaloid biosynthesis
+00902	Monoterpenoid biosynthesis
+00903	Limonene and pinene degradation
+00904	Diterpenoid biosynthesis
+00905	Brassinosteroid biosynthesis
+00906	Carotenoid biosynthesis
+00908	Zeatin biosynthesis
+00909	Sesquiterpenoid biosynthesis
+00910	Nitrogen metabolism
+00920	Sulfur metabolism
+00930	Caprolactam degradation
+00940	Phenylpropanoid biosynthesis
+00941	Flavonoid biosynthesis
+00942	Anthocyanin biosynthesis
+00943	Isoflavonoid biosynthesis
+00944	Flavone and flavonol biosynthesis
+00945	Stilbenoid, diarylheptanoid and gingerol biosynthesis
+00950	Isoquinoline alkaloid biosynthesis
+00960	Tropane, piperidine and pyridine alkaloid biosynthesis
+00965	Betalain biosynthesis
+00970	Aminoacyl-tRNA biosynthesis
+00980	Metabolism of xenobiotics by cytochrome P450
+00981	Insect hormone biosynthesis
+00982	Drug metabolism - cytochrome P450
+00983	Drug metabolism - other enzymes
+01040	Biosynthesis of unsaturated fatty acids
+01051	Biosynthesis of ansamycins
+01053	Biosynthesis of siderophore group nonribosomal peptides
+01055	Biosynthesis of vancomycin group antibiotics
+01056	Biosynthesis of type II polyketide backbone
+01057	Biosynthesis of type II polyketide products
+01058	Acridone alkaloid biosynthesis
+04070	Phosphatidylinositol signaling system
+04150	mTOR signaling pathway
+04660	T cell receptor signaling pathway

@@ -1,0 +1,43 @@
+
+MIDAS: Metagenomic Intra-species Diversity Analysis System
+version 1.3.0; github.com/snayfach/MIDAS
+Copyright (C) 2015-2016 Stephen Nayfach
+Freely distributed under the GNU General Public License (GPLv3)
+
+===========Parameters===========
+Command: /usr/midas/MIDAS-1.3.2/scripts/run_midas.py snps /share/SRR1297187_1.midas -1 /share/SRR1297187_1.fastq.gz -n 100000 -t 4 --remove_temp -d /share/midas_db_v1.2
+Script: run_midas.py snps
+Database: /share/midas_db_v1.2
+Output directory: /share/SRR1297187_1.midas
+Remove temporary files: True
+Pipeline options:
+  build bowtie2 database of genomes
+  align reads to bowtie2 genome database
+  use samtools to generate pileups and count variants
+Database options:
+  include all species with >=3.0X genome coverage
+Read alignment options:
+  input reads (unpaired): /share/SRR1297187_1.fastq.gz
+  alignment speed/sensitivity: very-sensitive
+  alignment mode: global
+  number of reads to use from input: 100000
+  number of threads for database search: 4
+SNP calling options:
+  minimum alignment percent identity: 94.0
+  minimum mapping quality score: 20
+  minimum base quality score: 30
+  minimum read quality score: 20
+  minimum alignment coverage of reads: 0.75
+  trim 0 base-pairs from 3'/right end of read
+================================
+
+Building database of representative genomes
+command: /usr/midas/MIDAS-1.3.2/bin/Linux/bowtie2-build --threads 4 /share/SRR1297187_1.midas/snps/temp/genomes.fa /share/SRR1297187_1.midas/snps/temp/genomes 
+
+Mapping reads to representative genomes
+command: /usr/midas/MIDAS-1.3.2/bin/Linux/bowtie2 --no-unal -x /share/SRR1297187_1.midas/snps/temp/genomes -u 100000 --very-sensitive --threads 4 -q -U /share/SRR1297187_1.fastq.gz | /usr/midas/MIDAS-1.3.2/bin/Linux/samtools view -b - --threads 4 | /usr/midas/MIDAS-1.3.2/bin/Linux/samtools sort - --threads 4 -o /share/SRR1297187_1.midas/snps/temp/genomes.bam 
+
+Indexing bamfile
+command: /usr/midas/MIDAS-1.3.2/bin/Linux/samtools index /share/SRR1297187_1.midas/snps/temp/genomes.bam
+
+Counting alleles
