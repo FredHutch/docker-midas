@@ -1,23 +1,24 @@
 FROM ubuntu:16.04
 MAINTAINER sminot@fredhutch.org
 
+# Add files
+RUN mkdir /usr/midas
+ADD requirements.txt /usr/midas
+
+
 # Install prerequisites
 RUN apt update && \
 	apt-get install -y build-essential wget unzip python2.7 python-dev git python-pip \
 	bats awscli curl zlib1g-dev libbz2-dev liblzma-dev libcurl4-openssl-dev libssl1.0.0 \
-	libssl-dev libtbb-dev g++
+	libssl-dev libtbb-dev g++ && \
+	pip install -r /usr/midas/requirements.txt && \
+	rm /usr/midas/requirements.txt
 
 
 # Use /share as the working directory
 RUN mkdir /share
 WORKDIR /share
 
-# Add files
-RUN mkdir /usr/midas
-ADD requirements.txt /usr/midas
-
-# Install python requirements
-RUN pip install -r /usr/midas/requirements.txt && rm /usr/midas/requirements.txt
 
 # Install MIDAS and remove the samtools and bowtie2 binaries
 RUN cd /usr/midas && \
