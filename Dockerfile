@@ -11,8 +11,7 @@ RUN apt update && \
 	apt-get install -y build-essential wget unzip python2.7 python-dev git python-pip \
 	bats awscli curl zlib1g-dev libbz2-dev liblzma-dev libcurl4-openssl-dev libssl1.0.0 \
 	libssl-dev libtbb-dev g++ && \
-	pip install -r /usr/midas/requirements.txt && \
-	rm /usr/midas/requirements.txt
+	pip install -r /usr/midas/requirements.txt
 
 
 # Use /share as the working directory
@@ -66,6 +65,10 @@ ADD helpers /usr/midas/helpers
 RUN cd /usr/midas && \
 	chmod +x run.py && \
 	ln -s /usr/midas/run.py /usr/bin/
+
+
+# Install prereq's including Numpy a second time
+RUN pip install -r /usr/midas/requirements.txt
 
 
 # Run tests and then remove the folder
