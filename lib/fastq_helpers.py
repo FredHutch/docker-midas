@@ -94,6 +94,14 @@ def get_sra(accession, temp_folder):
         temp_folder, accession
     ])
 
+    # Clear the cache
+    logging.info("Clearing the cache for fastq-dump")
+    run_cmds([
+        "rm",
+        "-f",
+        "/root/ncbi/public/sra/{}*".format(accession)
+    ])
+
     # Combine any multiple files that were found
     logging.info("Concatenating output files")
     with open(local_path + ".temp", "wt") as fo:
