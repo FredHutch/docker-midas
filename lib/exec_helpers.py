@@ -58,7 +58,10 @@ def get_reference_database(ref_db, temp_folder):
         logging.info("Getting reference database from S3: " + ref_db)
 
         # Save the database to the local temp folder
-        local_fp = os.path.join(temp_folder, ref_db.split('/')[-1] + "/")
+        local_fp = os.path.join(
+            temp_folder,
+            ref_db.rstrip("/").split('/')[-1] + "/"
+        )
 
         assert os.path.exists(local_fp) is False
 
