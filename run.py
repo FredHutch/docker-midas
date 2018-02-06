@@ -155,7 +155,7 @@ if __name__ == "__main__":
 
     # Delete all files created for this analysis
     logging.info("Removing temporary folder: " + temp_folder)
-    shutil.rmtree(sample_temp_folder)
+    shutil.rmtree(temp_folder)
 
     # Stop logging
     logging.info("Done")
