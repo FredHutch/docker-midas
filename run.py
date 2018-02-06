@@ -45,7 +45,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Make a temporary folder for all files to be placed in
-    temp_folder = os.path.join(args.temp_folder, str(uuid.uuid4()))
+    temp_folder = os.path.join(args.temp_folder, str(uuid.uuid4())[:8])
     assert os.path.exists(temp_folder) is False
     os.mkdir(temp_folder)
 
@@ -82,12 +82,20 @@ if __name__ == "__main__":
         # Keep track of the time elapsed to process each sample
         start_time = time.time()
 
+        # Make a new temporary folder for this sample
+        sample_temp_folder = os.path.join(temp_folder, str(uuid.uuid4())[:8])
+        assert os.path.exists(sample_temp_folder) is False
+        logging.info(
+            "Making temp folder for this sample: {}".format(sample_temp_folder)
+        )
+        os.mkdir(sample_temp_folder)
+
         logging.info("Processing input argument: " + input_str)
 
         # Capture each command in a try statement
         # Get the input reads
         try:
-            read_fp = get_reads_from_url(input_str, temp_folder)
+            read_fp = get_reads_from_url(input_str, sample_temp_folder)
         except:
             exit_and_clean_up(temp_folder)
 
@@ -96,7 +104,7 @@ if __name__ == "__main__":
             output_folder = run_midas(
                 read_fp,               # FASTQ file path
                 db_fp,                 # Local path to DB
-                temp_folder,           # Folder for results
+                sample_temp_folder,           # Folder for results
                 threads=args.threads,
             )
         except:
@@ -137,11 +145,17 @@ if __name__ == "__main__":
             "total_reads": n_reads,
             "time_elapsed": time.time() - start_time
         }
-        return_results(output, output_prefix, args.output_folder, temp_folder)
+        return_results(
+            output, output_prefix, args.output_folder, sample_temp_folder
+        )
 
         # Delete any files that were created for this sample
-        logging.info("Removing temporary folder: " + temp_folder)
-        shutil.rmtree(temp_folder)
+        logging.info("Removing temporary folder: " + sample_temp_folder)
+        shutil.rmtree(sample_temp_folder)
+
+    # Delete all files created for this analysis
+    logging.info("Removing temporary folder: " + temp_folder)
+    shutil.rmtree(sample_temp_folder)
 
     # Stop logging
     logging.info("Done")

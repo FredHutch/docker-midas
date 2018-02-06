@@ -11,7 +11,11 @@ from Bio.SeqIO.FastaIO import SimpleFastaParser
 from lib.exec_helpers import run_cmds
 
 
-def get_reads_from_url(input_str, temp_folder, random_string=uuid.uuid4()):
+def get_reads_from_url(
+    input_str,
+    temp_folder,
+    random_string=str(uuid.uuid4())[:8]
+):
     """Get a set of reads from a URL -- return the downloaded filepath."""
     logging.info("Getting reads from {}".format(input_str))
 
