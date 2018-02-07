@@ -82,40 +82,93 @@ def get_reads_from_url(
     return new_path
 
 
+def format_ena_url(accession):
+    """Format the accession that ENA uses to store FASTQ data."""
+    # See https://www.ebi.ac.uk/ena/browse/read-download for URL format
+    url = "ftp://ftp.sra.ebi.ac.uk/vol1/fastq"
+    folder1 = accession[:6]
+    url = "{}/{}".format(url, folder1)
+    if len(accession) > 9:
+        if len(accession) == 10:
+            folder2 = "00" + accession[-1]
+        elif len(accession) == 11:
+            folder2 = "0" + accession[-2:]
+        elif len(accession) == 12:
+            folder2 = accession[-3:]
+        else:
+            logging.info("This accession is too long: " + accession)
+            assert len(accession) <= 12
+        url = "{}/{}".format(url, folder2)
+    # Add the accession to the URL
+    url = "{}/{}/{}".format(url, accession, accession)
+    return url
+
+
 def get_sra(accession, temp_folder):
     """Get the FASTQ for an SRA accession."""
     local_path = os.path.join(temp_folder, accession + ".fastq")
 
-    logging.info("Downloading {} from SRA".format(accession))
-    run_cmds([
-        "fastq-dump",
-        "--split-files",
-        "--outdir",
-        temp_folder, accession
-    ])
+    # OPTION 1 -- DOWNLOAD FROM ENA VIA FTP
+    # Format the base URL to use to download from ENA
+    url = format_ena_url(accession)
+    logging.info("Base info for downloading from ENA: " + url)
+    # There are three possible file endings
+    file_endings = ["_1.fastq.gz", "_2.fastq.gz", ".fastq.gz"]
+    # Try to download each file
+    for end in file_endings:
+        run_cmds(["curl",
+                  "-o", os.path.join(temp_folder, accession + end),
+                  url + end], catchExcept=True)
+    # If none of those URLs downloaded, fall back to trying NCBI
+    if any([os.path.exists("{}/{}{}".format(temp_folder, accession, end))
+            for end in file_endings]):
+        # Combine them all into a single file
+        logging.info("Combining into a single FASTQ file")
+        with open(local_path, "wt") as fo:
+            cmd = "gunzip -c {}/{}*fastq.gz".format(temp_folder, accession)
+            gunzip = subprocess.Popen(cmd, shell=True, stdout=fo)
+            gunzip.wait()
 
-    # Clear the cache
-    logging.info("Clearing the cache for fastq-dump")
-    run_cmds([
-        "rm",
-        "-f",
-        "/root/ncbi/public/sra/{}*".format(accession)
-    ])
+        # Clean up the temporary files
+        logging.info("Cleaning up temporary files")
+        for end in file_endings:
+            fp = "{}/{}{}".format(temp_folder, accession, end)
+            if os.path.exists(fp):
+                os.unlink(fp)
+    else:
+        # OPTION 1 -- DOWNLOAD FROM SRA VIA fastq-dump
+        logging.info("No files found on ENA, trying SRA")
 
-    # Combine any multiple files that were found
-    logging.info("Concatenating output files")
-    with open(local_path + ".temp", "wt") as fo:
-        cmd = "cat {}/{}*fastq".format(temp_folder, accession)
-        cat = subprocess.Popen(cmd, shell=True, stdout=fo)
-        cat.wait()
+        logging.info("Downloading {} from SRA".format(accession))
+        run_cmds([
+            "fastq-dump",
+            "--split-files",
+            "--outdir",
+            temp_folder, accession
+        ], retry=3)
 
-    # Clean up the FASTQ headers for the downloaded file
-    if os.path.exists(local_path + ".temp"):
-        run_cmds(["mv", local_path + ".temp", local_path])
+        # Clear the cache
+        logging.info("Clearing the cache for fastq-dump")
+        run_cmds([
+            "rm",
+            "-f",
+            "/root/ncbi/public/sra/{}*".format(accession)
+        ])
+
+        # Combine any multiple files that were found
+        logging.info("Concatenating output files")
+        with open(local_path + ".temp", "wt") as fo:
+            cmd = "cat {}/{}*fastq".format(temp_folder, accession)
+            cat = subprocess.Popen(cmd, shell=True, stdout=fo)
+            cat.wait()
+
+        # Clean up the FASTQ headers for the downloaded file
+        if os.path.exists(local_path + ".temp"):
+            run_cmds(["mv", local_path + ".temp", local_path])
 
     # Check to see if the file was downloaded
-    msg = "File could not be downloaded from SRA: {}".format(accession)
-    assert os.path.exists(local_path), msg
+    msg = "SRA accession could not be downloaded from SRA or ENA: {}"
+    assert os.path.exists(local_path), msg.format(accession)
 
     # Return the path to the file
     logging.info("Done fetching " + accession)
