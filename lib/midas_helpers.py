@@ -117,9 +117,10 @@ def run_midas(
         "-t", str(threads),
         "--remove_temp",
         "-d", db_fp
-    ])
-    assert os.path.exists(
-        os.path.join(output_folder, "genes")
+    ],
+        # Tolerate failure of this command because it may fail if
+        # there are no species meeting the indicated depth threshold
+        catchExcept=True
     )
 
     logging.info("Done running MIDAS")
