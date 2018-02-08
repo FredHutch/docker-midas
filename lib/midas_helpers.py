@@ -173,10 +173,11 @@ def parse_midas_output(output_folder, ref_db=None):
 
     # Read in the genes results, if present
     genes_folder = os.path.join(output_folder, "genes")
-    if os.path.exists(genes_folder):
+    gene_summary_fp = os.path.join(genes_folder, "summary.txt")
+    if os.path.exists(gene_summary_fp):
 
         output["genes"] = parse_table_to_json(
-            os.path.join(genes_folder, "summary.txt")
+            gene_summary_fp
         )
 
         for species in output["genes"]:
