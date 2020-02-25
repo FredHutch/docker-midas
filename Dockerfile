@@ -59,7 +59,6 @@ RUN apt update && \
 	mkdir vsearch && \
 	cd vsearch && \
 	wget https://github.com/torognes/vsearch/releases/download/v2.14.2/vsearch-2.14.2-linux-x86_64.tar.gz && \
-	mv vsearch-2.14.2-linux-x86_64.tar.gz vsearch && \
 	tar xzvf vsearch-2.14.2-linux-x86_64.tar.gz && \
 	cp vsearch-2.14.2-linux-x86_64/bin/vsearch /usr/local/bin/
 
