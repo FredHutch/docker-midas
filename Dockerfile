@@ -52,7 +52,17 @@ RUN apt update && \
 	wget https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.8.2/sratoolkit.2.8.2-ubuntu64.tar.gz && \
 	tar xzf sratoolkit.2.8.2-ubuntu64.tar.gz && \
 	ln -s /usr/local/bin/sratoolkit.2.8.2-ubuntu64/bin/* /usr/local/bin/ && \
-	rm sratoolkit.2.8.2-ubuntu64.tar.gz
+	rm sratoolkit.2.8.2-ubuntu64.tar.gz && \
+	echo "" && \
+	echo "INSTALLING VSEARCH" && \
+	cd /usr/local && \
+	mkdir vsearch && \
+	cd vsearch && \
+	wget https://github.com/torognes/vsearch/releases/download/v2.14.2/vsearch-2.14.2-linux-x86_64.tar.gz && \
+	mv vsearch-2.14.2-linux-x86_64.tar.gz vsearch && \
+	tar xzvf vsearch-2.14.2-linux-x86_64.tar.gz && \
+	cp vsearch-2.14.2-linux-x86_64/bin/vsearch /usr/local/bin/
+
 
 # Use /share as the working directory
 RUN mkdir /share
