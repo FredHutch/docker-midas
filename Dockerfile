@@ -14,7 +14,7 @@ ADD requirements.txt /usr/midas
 RUN apt update && \
 	apt-get install -y build-essential wget unzip python2.7 python-dev git python-pip \
 	bats awscli curl zlib1g-dev libbz2-dev liblzma-dev libcurl4-openssl-dev libssl1.0.0 \
-	libssl-dev libtbb-dev g++ && \
+	libssl-dev libtbb-dev g++ hmmer && \
 	pip install -r /usr/midas/requirements.txt && \
 	cd /usr/midas && \
 	echo "" && \
