@@ -9,7 +9,7 @@ WORKDIR /usr/midas
 RUN apt update && \
 	apt-get install -y g++ && \
 	apt-get install -y build-essential wget zlib1g-dev libbz2-dev liblzma-dev \
-	libncurses5-dev libncursesw5-dev libz-dev libgsl-dev gcc && \
+	libncurses5-dev libncursesw5-dev libz-dev libgsl-dev gcc procps && \
 	echo "INSTALLING MIDAS" && \
 	wget https://github.com/czbiohub-sf/MIDAS/archive/refs/tags/v3.tar.gz && \
 	tar xzf v3.tar.gz && \
