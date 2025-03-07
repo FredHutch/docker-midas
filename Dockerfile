@@ -12,7 +12,7 @@ RUN apt update && \
 	echo "INSTALLING MIDAS" && \
 	wget https://github.com/czbiohub-sf/MIDAS/archive/refs/tags/v3.tar.gz && \
 	tar xzf v3.tar.gz && \
-	pip3 install setuptools numpy>=1.7.0 biopython>=1.6.2 pysam>=0.8.1 pandas>=0.17.1
+	pip3 install setuptools "numpy>=1.7.0" "biopython>=1.6.2" "pysam>=0.8.1" "pandas>=0.17.1"
 ENV PYTHONPATH="/usr/midas/MIDAS-3"
 RUN cd MIDAS-3 && \
 	python3 setup.py install
