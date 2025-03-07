@@ -7,7 +7,8 @@ WORKDIR /usr/midas
 
 # ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && \
-	apt-get install -y build-essential g++ wget zlib1g-dev libbz2-dev liblzma-dev \
+	apt-get install -y g++ && \
+	apt-get install -y build-essential wget zlib1g-dev libbz2-dev liblzma-dev \
 	libncurses5-dev libncursesw5-dev libz-dev libgsl-dev gcc && \
 	echo "INSTALLING MIDAS" && \
 	wget https://github.com/czbiohub-sf/MIDAS/archive/refs/tags/v3.tar.gz && \
