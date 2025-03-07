@@ -1,2 +1,0 @@
-species_id	pangenome_size	covered_genes	fraction_covered	mean_coverage	marker_coverage	aligned_reads	mapped_reads
-Salmonella_enterica_58156	108616	22927	0.211083081682	0.760715436302	3.26449275362	97933	80722
