@@ -23,6 +23,6 @@ ENV PYTHONPATH="/usr/midas/MIDAS-3:${PYTHONPATH}"
 ENV PATH="/usr/midas/MIDAS-3/scripts:${PATH}"
 
 # Add the hs-blastn, bowtie2, and samtools binaries to the PATH
-COPY --from=quay.io/biocontainers/hs-blastn:0.0.5--h9948957_6 /usr/local/bin/hs-blastn /usr/midas/MIDAS-3/bin/Linux/hs-blastn
-COPY --from=quay.io/biocontainers/bowtie2:2.3.2--py36pl5.22.0_1 /usr/local/bin/bowtie2 /usr/midas/MIDAS-3/bin/Linux/bowtie2
-COPY --from=quay.io/biocontainers/samtools:1.4--0 /usr/local/bin/samtools /usr/midas/MIDAS-3/bin/Linux/samtools
+COPY --from=quay.io/biocontainers/hs-blastn:0.0.5--h9948957_6 /usr/local/bin/hs-blastn /usr/local/bin/hs-blastn
+COPY --from=quay.io/biocontainers/bowtie2:2.3.2--py36pl5.22.0_1 /usr/local/bin/bowtie2 /usr/local/bin/bowtie2
+COPY --from=quay.io/biocontainers/samtools:1.4--0 /usr/local/bin/samtools /usr/local/bin/samtools
