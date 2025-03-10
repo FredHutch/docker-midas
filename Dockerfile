@@ -21,3 +21,6 @@ RUN cd MIDAS-3 && \
 # Add to the PATH
 ENV PYTHONPATH="/usr/midas/MIDAS-3:${PYTHONPATH}"
 ENV PATH="/usr/midas/MIDAS-3/scripts:${PATH}"
+
+# Add the hs-blastn binary to the PATH
+COPY --from=quay.io/biocontainers/hs-blastn:0.0.5--h9948957_6 /usr/local/bin/hs-blastn /usr/midas/MIDAS-3/bin/hs-blastn
